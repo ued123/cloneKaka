@@ -2,6 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
+    <!--
+    parent 설정을 통해 2.4.3 버전에 해당하는 스프링 부트 라이브러리에 의존성이 맞는 라이브러리를 넣어준다
+    관련 라이브러리 추가시 자동으로 의존성을 보장함
+    -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -17,20 +22,24 @@
         <java.version>1.8</java.version>
     </properties>
     <dependencies>
-        <!-- jdbc를 넣었을때 db관련 설정 필요함 안그러면 구동안됨-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-data-jdbc</artifactId>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-data-jpa</artifactId>-->
-<!--        </dependency>-->
+        <!-- jdbc를 넣었을때 db관련 설정 필요함 안그러면 구동안됨, 해당버전은 기본 dbcp는 hikari-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jdbc</artifactId>
+        </dependency>
+        <!-- spring jpa에 관련된 라이브러리 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!-- spring mvc 패턴을 사용하기 위한 mvc와 관련된 라이브러리 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <!-- 클래스 파일 빌드하면 서버재시작을 도와주는 개발 지원 툴 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -38,11 +47,14 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- DB mysql을 사용하기 위한 라이브러리 -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
+
+        <!-- 테스트를 도와주는 라이브러리 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -50,6 +62,7 @@
         </dependency>
     </dependencies>
 
+    <!-- maven 관련 플러긴 -->
     <build>
         <plugins>
             <plugin>
